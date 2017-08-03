@@ -1,35 +1,39 @@
 import { compose } from 'redux';
 import partial from 'lodash/fp/partial';
 import partialRight from 'lodash/fp/partialRight';
+import isFunction from 'lodash/fp/isFunction';
 
 import createWebSocket from './createWebSocket';
-import { connecting, open, closed, message } from './actions';
+import { message, connecting, open, closed } from './actions';
 
-export default function initWebSocket({ dispatch }, config, websocket) {
-  websocket = createWebSocket(config);
-  // Function will dispatch actions returned from action creators.
-  const dispatchAction = partial(compose, [dispatch]);
+export default function initWebSocket({ dispatch }, params) {
+  // Action creators actions dispatcher.
+  const actionDispatch = partial(compose, [dispatch]);
 
-  // Setup handlers to be called like this:
-  // dispatch(open(event));
+  const websocket = createWebSocket(params);
+
+  websocket.onclose = actionDispatch(closed);
+
+  websocket.onmessage = actionDispatch(message);
+
   websocket.onopen = (event) => {
-    if (typeof config.onOpen === 'function') {
-      config.onOpen(event);
+    if (isFunction(params.onOpen)) {
+      params.onOpen(event);
     }
-    const openAction = dispatchAction(open);
+
+    const openAction = actionDispatch(open);
     openAction(event);
   };
-  websocket.onclose = dispatchAction(closed);
-  websocket.onmessage = dispatchAction(message);
-  // An optimistic callback assignment for WebSocket objects that support this
-  const onConnecting = dispatchAction(connecting);
-  // Add the websocket as the 2nd argument (after the event).
-  websocket.onconnecting = partialRight(onConnecting, [websocket]);
+
   websocket.onerror = (event) => {
-    if (typeof config.onError === 'function') {
-      config.onError(event);
+    if (isFunction(params.onError)) {
+      params.onError(event);
     }
   };
+
+  // WebSocket with onconnecting support can dispatch this action
+  const onConnecting = actionDispatch(connecting);
+  websocket.onconnecting = partialRight(onConnecting, [websocket]);
 
   return websocket;
 }

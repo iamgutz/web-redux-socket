@@ -1,7 +1,10 @@
+import log from 'fancy-log';
+
 export default function closeWebSocket(websocket) {
   if (websocket) {
-    console.warn(`Closing WebSocket connection to ${websocket.url} ...`);
+    log.warn(`Closing WebSocket connection to ${websocket.url} ...`);
     websocket.close();
-    websocket = null;
   }
+
+  return null;
 }

@@ -1,3 +1,5 @@
+import log from 'fancy-log';
+
 import initWebSocket from './initWebSocket';
 import closeWebSocket from './closeWebSocket';
 import * as types from './types';
@@ -10,9 +12,9 @@ const createMiddleware = () => {
   return store => next => (action) => {
     switch (action.type) {
       case types.WEBSOCKET_CONNECT:
-        closeWebSocket(websocket);
+        websocket = closeWebSocket(websocket);
 
-        websocket = initWebSocket(store, action.payload, websocket);
+        websocket = initWebSocket(store, action.payload);
 
         return next(action);
 
@@ -21,7 +23,7 @@ const createMiddleware = () => {
           websocket.send(JSON.stringify(action.payload));
         }
 
-        console.warn('WebSocket is not open. To open, dispatch action WEBSOCKET_CONNECT.');
+        log.warn('WebSocket is not open. To open, dispatch action WEBSOCKET_CONNECT.');
 
         return next(action);
 
