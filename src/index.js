@@ -28,7 +28,7 @@ const createMiddleware = () => {
         return next(action);
 
       case types.WEBSOCKET_DISCONNECT:
-        closeWebSocket(websocket);
+        websocket = closeWebSocket(websocket);
 
         return next(action);
 
