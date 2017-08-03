@@ -1,0 +1,10 @@
+{
+  "extends": "airbnb-base",
+  "parser": "babel-eslint",
+  "plugins": [
+    "import"
+  ],
+  "globals": {
+      "WebSocket": false
+  }
+}
