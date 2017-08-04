@@ -1,4 +1,4 @@
-import { log } from './utils';
+import { consola } from './utils';
 
 import initWebSocket from './initWebSocket';
 import closeWebSocket from './closeWebSocket';
@@ -23,7 +23,7 @@ const createMiddleware = () => {
           websocket.send(JSON.stringify(action.payload));
         }
 
-        log.warn('WebSocket is not open. To open, dispatch action WEBSOCKET_CONNECT.');
+        consola.warn('WebSocket is not open. To open, dispatch action WEBSOCKET_CONNECT.');
 
         return next(action);
 
