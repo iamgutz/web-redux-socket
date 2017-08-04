@@ -29,6 +29,7 @@ export default function initWebSocket({ dispatch }, params) {
     if (isFunction(params.onError)) {
       params.onError(event);
     }
+    websocket.close();
   };
 
   // WebSocket with onconnecting support can dispatch this action
