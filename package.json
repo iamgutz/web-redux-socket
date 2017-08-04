@@ -1,6 +1,6 @@
 {
   "name": "web-redux-socket",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Websocket Redux Middleware",
   "main": "lib/index.js",
   "dependencies": {
