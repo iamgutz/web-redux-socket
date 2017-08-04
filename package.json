@@ -24,7 +24,7 @@
   },
   "scripts": {
     "prerelease": "git add --all && git commit -m\"Publishing changes\"",
-    "push-master": "&& git push origin master",
+    "push-master": "git push origin master",
     "release": "npm version patch && npm run push-master && npm publish",
     "prepublish": "npm run build",
     "prebuild": "npm run clean-dist && npm run lint && npm run test",
