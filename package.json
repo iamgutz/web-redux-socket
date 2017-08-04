@@ -23,8 +23,9 @@
     "rimraf": "^2.6.1"
   },
   "scripts": {
-    "prerelease": "git add --all && git commit -m\"Publishing changes\" && git push origin master",
-    "release": "npm version patch && npm publish",
+    "prerelease": "git add --all && git commit -m\"Publishing changes\"",
+    "push-master": "&& git push origin master",
+    "release": "npm version patch && npm run push-master && npm publish",
     "prepublish": "npm run build",
     "prebuild": "npm run clean-dist && npm run lint && npm run test",
     "build": "babel src --out-dir lib",
