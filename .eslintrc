@@ -4,6 +4,10 @@
   "plugins": [
     "import"
   ],
+  "env": {
+    "mocha": true,
+    "browser": true
+  },
   "globals": {
       "WebSocket": false
   }

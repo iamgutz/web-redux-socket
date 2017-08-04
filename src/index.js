@@ -1,4 +1,4 @@
-import log from 'fancy-log';
+import { log } from './utils';
 
 import initWebSocket from './initWebSocket';
 import closeWebSocket from './closeWebSocket';
