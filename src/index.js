@@ -21,9 +21,9 @@ const createMiddleware = () => {
       case types.WEBSOCKET_SEND:
         if (websocket) {
           websocket.send(JSON.stringify(action.payload));
+        } else {
+          consola.warn('WebSocket is not open. To open, dispatch action WEBSOCKET_CONNECT.');
         }
-
-        consola.warn('WebSocket is not open. To open, dispatch action WEBSOCKET_CONNECT.');
 
         return next(action);
 
