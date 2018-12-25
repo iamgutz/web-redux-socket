@@ -1,7 +1,13 @@
 # web-redux-socket
+[![Version](https://img.shields.io/npm/v/web-redux-socket.svg?style=for-the-badge&logo=appveyor)]()
+[![Downloads](https://img.shields.io/npm/dw/web-redux-socket.svg?style=for-the-badge&logo=appveyor)]()
+[![License](https://img.shields.io/github/license/iamgutz/web-redux-socket.svg?style=for-the-badge&logo=appveyor)]()
+
 Redux Middleware for WebSocket connections.
 
 ## Installation
+`yarn add web-redux-socket`
+or
 `npm install web-redux-socket --save`
 
 ## Setup
